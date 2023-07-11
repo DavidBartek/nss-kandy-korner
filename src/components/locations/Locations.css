@@ -1,0 +1,50 @@
+.locationsList__list {
+    display: flex;
+    font-size: larger;
+}
+
+.locationsList__item {
+    margin-top: 50px;
+    margin-right: 50px;
+    padding: 1rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: black 1px 0 10px;
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+    border: hotpink dotted;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    transform-origin: bottom;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+
+.locationsList__item:hover {
+    cursor: pointer;
+    animation-name: bounce;
+    -moz-animation-name: bounce;
+}
+
+@keyframes bounce {
+	0%, 100%, 20%, 50%, 80% {
+		-webkit-transform: translateY(0);
+		-ms-transform:     translateY(0);
+		transform:         translateY(0)
+	}
+	40% {
+		-webkit-transform: translateY(-40px);
+		-ms-transform:     translateY(-40px);
+		transform:         translateY(-40px)
+	}
+	60% {
+		-webkit-transform: translateY(-15px);
+		-ms-transform:     translateY(-15px);
+		transform:         translateY(-15px)
+	}
+}
