@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import "./Locations.css"
 
 export const LocationsList = () => {
@@ -23,7 +23,7 @@ export const LocationsList = () => {
             {
                 locations.map(
                     (location) => {
-                        return <section className="locationsList__item">
+                        return <section className="locationsList__item" onClick={linkToNorthKorea}>
                             <header>{location.address}, Ohiotown, OH</header>
                             <div>{location.squareFootage} square feet of sweetness</div>
                         </section>
@@ -36,4 +36,8 @@ export const LocationsList = () => {
 
 
 
+}
+
+const linkToNorthKorea = () => {
+    window.open("https://goo.gl/maps/Bbs8QUotCXTAgZky9", '_blank')
 }
