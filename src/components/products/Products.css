@@ -1,0 +1,15 @@
+.productsList__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    font-size: larger;
+}
+
+.productsList__item {
+    text-align: center;
+    flex-basis: 10%;
+    border: solid red 5px;
+    padding: 1rem;
+    margin: 1rem;
+    min-height: 150px;
+}
