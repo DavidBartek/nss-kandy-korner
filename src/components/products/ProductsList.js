@@ -1,12 +1,27 @@
 import { useEffect, useState } from "react"
 import "./Products.css"
+import { useNavigate } from "react-router-dom"
 
 export const ProductsList = () => {
     // console.log("welcome to hell")
     const [products, setProducts] = useState([])
     const [expensiveOnly, setExpensiveOnly] = useState(false)
     const [filteredProducts, setFiltered] = useState([])
+    const navigate = useNavigate()
 
+    const localKandyUser = localStorage.getItem("kandy_user")
+    const kandyUserObj = JSON.parse(localKandyUser)
+
+    // inside return:
+    // {
+    //     kandyUserObj.staff
+    //         ? 
+    //             <li className="navbar__item navbar__products">
+    //             <Link className="navbar__link" to="/products">Products</Link>
+    //             </li>
+    //         :
+    //             console.log("Non-staff login; product link not displaying")
+    // }
 
     // options to sort the array of products by name:
     // option 1: sort incoming json data with javascript. See commented-out .sort method below.
@@ -58,6 +73,13 @@ export const ProductsList = () => {
             <h2 className="productsList__title">Product List</h2>
             <button className="productsButton" onClick={() => { setExpensiveOnly(true) } }>Show Top Priced</button>
             <button className="productsButton" onClick={() => { setExpensiveOnly(false) } }>Show All</button>
+            {
+                kandyUserObj.staff 
+                ? <>
+                    <button className="productsButton" onClick={() => navigate("/products/add")}>Add Product</button>
+                </>
+                : <></>
+            }
             <div className="productsList__list">
                 {filteredProducts.map(
                     (product) => {
