@@ -7,20 +7,26 @@ export const ProductsList = () => {
     const [expensiveOnly, setExpensiveOnly] = useState(false)
     const [filteredProducts, setFiltered] = useState([])
 
+
+    // options to sort the array of products by name:
+    // option 1: sort incoming json data with javascript. See commented-out .sort method below.
+    // in this case, the fetch url would be http://localhost:8088/products?_sort=name
+    // option 2 (above): modify the fetch url to invoke the _sort query string parameter. See fetch url.
+
     useEffect(
         () => {
-            fetch (`http://localhost:8088/products`)
+            fetch (`http://localhost:8088/products?_sort=name`)
                 .then(res => res.json())
                 .then((productsArray) => {
-                    productsArray.sort((a, b) => {
-                        if (a.name < b.name) {
-                            return -1
-                        } else if ( a.name > b.name ) {
-                            return 1
-                        } else {
-                            return 0
-                        }
-                    })
+                    // productsArray.sort((a, b) => {
+                    //     if (a.name < b.name) {
+                    //         return -1
+                    //     } else if ( a.name > b.name ) {
+                    //         return 1
+                    //     } else {
+                    //         return 0
+                    //     }
+                    // })
                     setProducts(productsArray)
                 })
         },
@@ -56,8 +62,9 @@ export const ProductsList = () => {
                 {filteredProducts.map(
                     (product) => {
                         return <section className="productsList__item">
-                            <header>{product.name}</header>
-                            <div>{product.unitPrice}</div>
+                            <header className="item__header">{product.name}</header>
+                            <div className="item__info">{product.type}</div>
+                            <div className="item__info">${product.unitPrice} each</div>
                         </section>
                     }
                 )}

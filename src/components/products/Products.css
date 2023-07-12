@@ -22,6 +22,14 @@
     box-shadow: rgb(95, 67, 81) 5px 5px 5px;
 }
 
+.item__header {
+    margin-bottom: 1em;
+}
+
+.item__info {
+    font-size: small;
+}
+
 .productsButton {
     background-color: hotpink;
     padding: 0.5rem;
