@@ -6,14 +6,14 @@ export const ProductForm = () => {
         name: "",
         typeId: 0,
         type: "",
-        unitPrice: null
+        unitPrice: 0
     })
     const [productTypes, setProductTypesArr] = useState([])
 
     const navigate = useNavigate()
 
     useEffect(() => {
-            fetch('http://localhost:8088/productTypes')
+            fetch('http://localhost:8088/types')
                 .then(res => res.json())
                 .then((typesArray) => {
                     setProductTypesArr(typesArray)
@@ -28,7 +28,6 @@ export const ProductForm = () => {
         const newProductToAPI = {
             name: newProduct.name,
             typeId: newProduct.typeId,
-            type: newProduct.type,
             unitPrice: newProduct.unitPrice
         }
 
@@ -55,26 +54,25 @@ export const ProductForm = () => {
                     required autoFocus
                     type="text"
                     className="form-control"
-                    placeholder="ur mum"
+                    placeholder="What would you like to give you diabeetus?"
                     value={newProduct.name}
                     onChange={
                         (e) => {
-                            const shallowCopy = {...newProduct}
-                            shallowCopy.name = e.target.value
-                            update(shallowCopy)
+                            const copy = {...newProduct}
+                            copy.name = e.target.value
+                            update(copy)
                         }
                     } />
             </fieldset>
             
             <fieldset className="form-group">
-                <label htmlFor="type">Product type:</label>
+                <label htmlFor="type">Product type: </label>
                 <select
                     required
                     onChange={
                         (e) => {
                             const shallowCopy = {...newProduct}
-                            shallowCopy.type = e.target.value
-                            shallowCopy.typeId = e.target.options[e.target.selectedIndex].getAttribute('data-key')
+                            shallowCopy.typeId = e.target.value
                             update(shallowCopy)
 
                         }
@@ -82,7 +80,7 @@ export const ProductForm = () => {
                     
                     <option value="">Select type</option>
                     {productTypes.map((type) => {
-                        return <option data-key={type.id} value={type.type}>
+                        return <option key={type.id} value={type.id}>
                             {type.type}
                         </option>
                     })}
@@ -90,7 +88,7 @@ export const ProductForm = () => {
             </fieldset>
             
             <fieldset className="form-group">
-                <label htmlFor="price">Unit price: $</label>
+                <label htmlFor="price">Unit price: $ </label>
                 <input
                     required
                     type="number"
@@ -115,7 +113,7 @@ export const ProductForm = () => {
             <button
                 onClick={(e) => navigate("/products")}
                 className="productForm__button">
-                    Return to products
+                Return to products
             </button>
         </form>
     )

@@ -30,7 +30,7 @@ export const ProductsList = () => {
 
     useEffect(
         () => {
-            fetch (`http://localhost:8088/products?_sort=name`)
+            fetch (`http://localhost:8088/products?_sort=name&_expand=type`)
                 .then(res => res.json())
                 .then((productsArray) => {
                     // productsArray.sort((a, b) => {
@@ -84,9 +84,9 @@ export const ProductsList = () => {
                 {filteredProducts.map(
                     (product) => {
                         return <section className="productsList__item">
-                            <header className="item__header">{product.name}</header>
-                            <div className="item__info">{product.type}</div>
-                            <div className="item__info">${product.unitPrice} each</div>
+                            <header className="item__header">{product?.name}</header>
+                            <div className="item__info">{product?.type?.type}</div>
+                            <div className="item__info">${product?.unitPrice} each</div>
                         </section>
                     }
                 )}
