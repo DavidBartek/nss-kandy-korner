@@ -1,0 +1,34 @@
+select:hover {
+    transform:scale(5)
+    rotate(290deg)
+}
+
+.productForm__button:hover {
+    animation: spin 1s infinite linear;
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+    border-color:hotpink;
+    border-style: dotted;
+    border-width: 1rem;
+    color: white;
+    text-shadow: black 1px 0 10px;
+    font-weight: 900;
+}
+
+@keyframes spin {
+    100% {transform: rotate(1turn)}
+}
+
+.form-control:hover {
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet, red);
+    background-size: 200% auto;
+    animation: gradientFlow 1s linear infinite
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 100%;
+    }
+}

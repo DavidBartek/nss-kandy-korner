@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import "./ProductForm.css"
 
 export const ProductForm = () => {
     const [newProduct, update] = useState({
@@ -45,7 +46,7 @@ export const ProductForm = () => {
     }
 
     return (
-        <form className="productForm">
+        <form className="productForm" onSubmit={(e) => handleSaveButtonClick(e)}>
             <h2 className="productForm__title">Add New Product</h2>
             
             <fieldset className="form-group">
@@ -106,7 +107,7 @@ export const ProductForm = () => {
             </fieldset>
 
             <button
-                onClick={(e) => handleSaveButtonClick(e)}
+                type="submit"
                 className="productForm__button">
                 Add Product
             </button>
