@@ -3,7 +3,6 @@ import "./Products.css"
 import { useNavigate } from "react-router-dom"
 
 export const ProductsList = () => {
-    // console.log("welcome to hell")
     const [products, setProducts] = useState([])
     const [expensiveOnly, setExpensiveOnly] = useState(false)
     const [filteredProducts, setFiltered] = useState([])

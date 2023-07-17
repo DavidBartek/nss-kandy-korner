@@ -54,7 +54,7 @@ export const ProductForm = () => {
                 <input
                     required autoFocus
                     type="text"
-                    className="form-control"
+                    className="form-control-productForm"
                     placeholder="What would you like to give you diabeetus?"
                     value={newProduct.name}
                     onChange={
@@ -64,6 +64,7 @@ export const ProductForm = () => {
                             update(copy)
                         }
                     } />
+                
             </fieldset>
             
             <fieldset className="form-group">
