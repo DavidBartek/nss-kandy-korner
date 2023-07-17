@@ -1,0 +1,12 @@
+.employees__list {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.employees__individual {
+    margin: 1rem;
+    padding: 1rem;
+    border: 2px cyan solid;
+    border-radius: 10px
+}

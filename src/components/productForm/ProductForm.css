@@ -1,7 +1,7 @@
-select:hover {
+/* select:hover {
     transform:scale(5)
     rotate(290deg)
-}
+} */
 
 .productForm__button:hover {
     animation: spin 1s infinite linear;

@@ -2,6 +2,8 @@ import { Outlet, Route, Routes } from "react-router-dom"
 import { LocationsList } from "../locations/LocationsList"
 import { ProductForm } from "../productForm/ProductForm"
 import { ProductsList } from "../products/ProductsList"
+import { HireForm } from "../employees/HireForm"
+import { EmployeeList } from "../employees/EmployeeList"
 
 export const EmployeeViews = () => {
     return (
@@ -20,6 +22,10 @@ export const EmployeeViews = () => {
 				<Route path="products" element={ <ProductsList /> } />
 
 				<Route path="products/add" element={ <ProductForm /> } />
+
+				<Route path="employees" element={ <EmployeeList />} />
+
+				<Route path="employees/hire" element={ <HireForm /> } />
 
 			</Route>
 		</Routes>
