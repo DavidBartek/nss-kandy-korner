@@ -18,13 +18,17 @@ export const EmployeeList = () => {
     const [employees, setEmployees] = useState([])
     const navigate = useNavigate()
 
-    useEffect(
-        () => {
-            fetch(`http://localhost:8088/employees?_expand=location`)
+    const getAllEmployees = () => {
+        fetch(`http://localhost:8088/employees?_expand=location`)
                 .then(res => res.json())
                 .then((employeeArray) => {
                     setEmployees(employeeArray)
                 })
+    }
+
+    useEffect(
+        () => {
+            getAllEmployees()
         },
         []
     )
@@ -48,6 +52,7 @@ export const EmployeeList = () => {
                         name={employee.name}
                         startDate={employee.startDate}
                         payRate={employee.payRate}
+                        getAllEmployees={getAllEmployees}
                         />
                     )
                 }

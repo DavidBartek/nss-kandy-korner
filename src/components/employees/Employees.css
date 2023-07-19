@@ -10,3 +10,12 @@
     border: 2px cyan solid;
     border-radius: 10px
 }
+
+.employees__fire {
+    margin-top: .5em;
+    background-color: rgb(199, 1, 1);
+    color: black;
+    font-weight: 900;
+    text-shadow: rgb(255, 129, 129) 1px 1px 1px;
+    box-shadow: rgb(255, 129, 129) 1px 1px 5px;
+}
