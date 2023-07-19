@@ -6,41 +6,20 @@ export const ProductsList = () => {
     const [products, setProducts] = useState([])
     const [expensiveOnly, setExpensiveOnly] = useState(false)
     const [filteredProducts, setFiltered] = useState([])
+    const [customerId, setCustomerId] = useState(0)
     const navigate = useNavigate()
 
     const localKandyUser = localStorage.getItem("kandy_user")
     const kandyUserObj = JSON.parse(localKandyUser)
-
-    // inside return:
-    // {
-    //     kandyUserObj.staff
-    //         ? 
-    //             <li className="navbar__item navbar__products">
-    //             <Link className="navbar__link" to="/products">Products</Link>
-    //             </li>
-    //         :
-    //             console.log("Non-staff login; product link not displaying")
-    // }
-
-    // options to sort the array of products by name:
-    // option 1: sort incoming json data with javascript. See commented-out .sort method below.
-    // in this case, the fetch url would be http://localhost:8088/products?_sort=name
-    // option 2 (above): modify the fetch url to invoke the _sort query string parameter. See fetch url.
+    // in this object:
+    // id is userId
+    // staff is true or false
 
     useEffect(
         () => {
             fetch (`http://localhost:8088/products?_sort=name&_expand=type`)
                 .then(res => res.json())
                 .then((productsArray) => {
-                    // productsArray.sort((a, b) => {
-                    //     if (a.name < b.name) {
-                    //         return -1
-                    //     } else if ( a.name > b.name ) {
-                    //         return 1
-                    //     } else {
-                    //         return 0
-                    //     }
-                    // })
                     setProducts(productsArray)
                 })
         },
@@ -66,6 +45,43 @@ export const ProductsList = () => {
         [expensiveOnly]
     )
 
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/customers?userId=${kandyUserObj.id}`)
+                .then(res => res.json())
+                .then((customerData) => {
+                    setCustomerId(customerData[0].id)
+                })
+        },
+        []
+    )
+
+    // creates an object containing customerId, productId, productQuantity (1)
+    // POST object to API database, "purchases"
+    const handlePurchaseClick = (e) => {
+        // console.log("hi")
+        e.preventDefault()
+        // console.log(e.target)
+        const purchaseToPost = {
+            customerId: customerId,
+            productId: parseInt(e.target.value),
+            productQuantity: 1
+        }
+        // console.log(purchaseToPost)
+        
+        return fetch('http://localhost:8088/purchases', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify(purchaseToPost)
+        })
+            .then(res => res.json())
+            .then(() => {
+                console.log("purchase added to database")
+            })
+    }
+
     return (
         <>
             <article className="productsList">
@@ -79,17 +95,39 @@ export const ProductsList = () => {
                 </>
                 : <></>
             }
-            <div className="productsList__list">
-                {filteredProducts.map(
-                    (product) => {
-                        return <section className="productsList__item">
-                            <header className="item__header">{product?.name}</header>
-                            <div className="item__info">{product?.type?.type}</div>
-                            <div className="item__info">${product?.unitPrice} each</div>
-                        </section>
-                    }
-                )}
-            </div>
+            {
+                kandyUserObj.staff
+                ? <>
+                    <div className="productsList__list">
+                        {filteredProducts.map(
+                            (product) => {
+                                return <section className="productsList__item" key={product.id}>
+                                    <header className="item__header">{product?.name}</header>
+                                    <div className="item__info">{product?.type?.type}</div>
+                                    <div className="item__info">${product?.unitPrice} each</div>
+                                </section>
+                            }
+                        )}
+                    </div>  
+                </>
+                : <>
+                    <div className="productsList__list">
+                        {filteredProducts.map(
+                            (product) => {
+                                return <section className="productsList__item" key={product.id}>
+                                    <header className="item__header">{product?.name}</header>
+                                    <div className="item__info">{product?.type?.type}</div>
+                                    <div className="item__info">${product?.unitPrice} each</div>
+                                    <button className="item__purchase" value={product.id} onClick={(e) => handlePurchaseClick(e)}>Purchase</button>
+                                </section>
+                            }
+                        )}
+                    </div>  
+                
+                </>
+            }
+            
+            
         </article>
         </>
     )
