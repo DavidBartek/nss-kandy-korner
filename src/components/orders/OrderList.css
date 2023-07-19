@@ -1,0 +1,11 @@
+.purchases {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.purchase {
+    border: 3px cyan solid;
+    margin: 1em;
+    padding: 1em
+}
