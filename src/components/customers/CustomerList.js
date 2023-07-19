@@ -36,7 +36,7 @@ export const CustomerList = () => {
                 <div className="customers__list">
                 {
                     customers.map(customer => <Customer 
-                        key={`employee--${customer.id}`}
+                        key={`customer--${customer.id}`}
                         id={customer.id}
                         name={customer.name}
                         email={customer.email}
